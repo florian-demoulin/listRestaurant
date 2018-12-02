@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="lib/vue.min.js"></script>
+    <script src="lib/lodash.min.js"></script>
+
+    <script src="js/script.js"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Gestionnaire restaurants VueJS</title>
+</head>
+
+<body>
+    <div id="app">
+
+
+        <h1>Nombre de restaurants : {{restaurants.count}}</h1>
+        <div id="msgBoxSuccess">
+            <label>Success</label>
+        </div>
+        <table>
+            <thead>
+
+                <tr>
+                    <th>Nom</th>
+                    <th>Cuisine</th>
+                    <th>e</th>
+                    <th>s</th>
+                </tr>
+            </thead>
+
+            <tbody>
+			<tr>
+                    <form v-on:submit="ajouterRestaurant">
+                        <td>
+                            <input type="text" name="nom" required v-model="nom">
+                        </td>
+                        <td>
+                            <input type="text" name="cuisine" required v-model="cuisine">
+                        </td>
+                        <td>
+                            <button v-on:click="ajouterRestaurant">+</button>
+                        </td>
+
+                    </form>
+                </tr>
+                <tr v-bind:id="getRestId(r)" v-for="r,index in restaurants" v-bind:style="{backgroundColor:getColor(index)}">
+                    <form v-on:submit="update" id="tete">
+
+                        <td>
+                            <input type="text" v-bind:value="getId(r)" name="_id" style="display:none">
+                            <input type="text" v-bind:value="getRestId(r)" name="restaurant_id" style="display:none">
+                            <label v-bind:id="'lab'+getRestId(r)" for="nom">
+                                {{r.name}}
+                            </label>
+                            <input type="text" v-bind:id="'input'+getRestId(r)" v-bind:value="getName(r)"
+                                name="nom" style="display:none" required> 
+
+                        </td>
+                        <td> {{r.cuisine}}</td>
+                        <td>
+                            <button id="btnEdit" v-bind:id="'btnE'+getRestId(r)" v-on:click="edit(r)">
+                                E
+                            </button>
+                            <button id="btnVali" v-bind:id="'btnV'+getRestId(r)" v-on:click="update" style="display:none">
+                                V
+                            </button>
+                        </td>
+                        <td>
+                            <button v-on:click="supprimerRestaurant(index)">
+                                S
+                            </button>
+
+                        </td>
+                    </form>
+                </tr>
+                
+            </tbody>
+
+        </table>
+
+		<button v-on:click="pageFirst()">First</button>
+        <button v-on:click="pagePrev()">Previous</button>
+        <button v-on:click="pageNext()">Next</button>
+		<button v-on:click="pageLast()">Last</button>
+    </div>
+</body>
+
+</html>
