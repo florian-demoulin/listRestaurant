@@ -53,15 +53,13 @@ function init() {
 				}
 				this.getRestaurantsFromServeur();
 			},
-			pageLast() {
+			/*pageLast() {
 				while(this.page++) {
 					this.page++;
 					this.getRestaurantsFromServeur();
 				}
-					
-				
-				
-			},
+	
+			},*/
             supprimerRestaurant(index) {
                 this.restaurants.splice(index, 1);
             },
